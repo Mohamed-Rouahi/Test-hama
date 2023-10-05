@@ -5,10 +5,11 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout your source code from the repository.
-                script {
-                    https://github.com/Mohamed-Rouahi/Test-hama.git
-                    checkout scm
-                }
+                checkout([
+                    $class: 'GitSCM',
+                    branches: [[name: '*/main']], // You can specify the branch you want to build here.
+                    userRemoteConfigs: [[url: 'https://github.com/Mohamed-Rouahi/Test-hama.git']]
+                ])
             }
         }
 
@@ -16,7 +17,7 @@ pipeline {
             steps {
                 // Add commands to run your unit tests here using the 'sh' step.
                 // For example, if you're using Maven for a Java project:
-                 sh 'mvn clean test'
+                sh 'mvn clean test'
             }
         }
 
@@ -24,6 +25,10 @@ pipeline {
     }
 
     post {
-        // Define post-build actions if necessary.
+        failure {
+            emailext subject: 'Build Failure Notification',
+                    body: 'The build failed. Please check the Jenkins console output for details.',
+                    to: 'mohamed.rouahi@eprit.tn'
+        }
     }
 }
