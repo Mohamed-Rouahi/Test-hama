@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Checkout your source code from the repository.
                 script {
-                    // Replace 'your-repo-url' with your actual repository URL.
+                    https://github.com/Mohamed-Rouahi/Test-hama.git
                     checkout scm
                 }
             }
@@ -16,7 +16,7 @@ pipeline {
             steps {
                 // Add commands to run your unit tests here using the 'sh' step.
                 // For example, if you're using Maven for a Java project:
-                sh 'mvn test'
+                 sh 'mvn clean test'
             }
         }
 
