@@ -2,20 +2,28 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                // Your build steps here
+                // Checkout your source code from the repository.
+                script {
+                    // Replace 'your-repo-url' with your actual repository URL.
+                    checkout scm
+                }
             }
         }
-        stage('Test') {
+
+        stage('Unit Tests') {
             steps {
-                // Your testing steps here
+                // Add commands to run your unit tests here using the 'sh' step.
+                // For example, if you're using Maven for a Java project:
+                sh 'mvn test'
             }
         }
-        stage('Deploy') {
-            steps {
-                // Your deployment steps here
-            }
-        }
+
+        // Add more stages for building, deployment, etc. as needed.
+    }
+
+    post {
+        // Define post-build actions if necessary.
     }
 }
