@@ -18,11 +18,4 @@ pipeline {
         // Add more stages for building, deployment, etc. as needed.
     }
 
-    post {
-        failure {
-            emailext subject: 'Build Failure Notification',
-                    body: 'The build failed. Please check the Jenkins console output for details.',
-                    to: 'mohamed.rouahi@eprit.tn'
-        }
-    }
 }
