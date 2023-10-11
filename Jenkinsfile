@@ -12,6 +12,19 @@ pipeline {
                 ])
             }
         }
+        stage('Send Email') {
+            steps {
+                script {
+                    def commitMessage = sh(script: "git log -1 --pretty=format:'%h %s'", returnStatus: true).trim()
+                    emailext (
+                        subject: "Nouveau commit sur le dépôt",
+                        body: "Un nouveau commit a été effectué sur le dépôt.\n\nDétails du commit :\n\n${commitMessage}",
+                        to: "mohamed.rouahi@esprit.tn,sabri.abassi@esprit.com",
+                        attachLog: true,
+                    )
+                }
+            }
+        }
 
 
 
@@ -19,3 +32,5 @@ pipeline {
     }
 
 }
+
+
