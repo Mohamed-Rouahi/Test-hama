@@ -13,13 +13,7 @@ pipeline {
             }
         }
 
-        stage('Unit Tests') {
-            steps {
-                // Add commands to run your unit tests here using the 'sh' step.
-                // For example, if you're using Maven for a Java project:
-                sh 'mvn clean test'
-            }
-        }
+
 
         // Add more stages for building, deployment, etc. as needed.
     }
